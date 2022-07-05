@@ -1,0 +1,10 @@
+{% extends 'base.html.twig' %}
+{% block body %}
+<div class="container">
+  <h1>Browse {{ genre ? genre : 'All Genres' }}</h1>
+  <a class="navbar-brand" href="{{ path('app_homepage') }}">
+    <i class="fas fa-record-vinyl"></i>
+    Back to Homepage
+  </a>
+</div>
+{% endblock %}
