@@ -54,14 +54,23 @@
                 <table class="table text-white">
                     <thead >
                     <tr>
-                        <th scope="col text-center">#</th>
+                        <th scope="col">#</th>
                         <th scope="col" class="col-md-10 text-center">Treść</th>
                         <th scope="col" class="col-md-1 p-4 text-center" ></th>
                         <th scope="col" class="col-md-1 p-2" >Akcja</th>
 
                     </tr>
                     </thead>
-                    <table id="demo" class="table table-bordered table-sm text-white" ></table>
+                    <table id="demo" class="table table-bordered table-sm text-white" >
+                        {% for article in articles  %}
+                            <tr>
+                            <td>{{ article.id }}</td>
+                                <td>{{ article.content }}</td>
+                            <td><span class='material-icons'><button onclick='remove($id)' >delete</button></span><span class='material-icons'></span></a> </td>
+                            <td><a href={{ path('app_edit') }}><span class='material-icons'>edit</span></a><span class='material-icons'></span></a></td>
+                        </tr>
+                        {% endfor %}
+                    </table>
                     <tbody>
 
                     <br><br>
@@ -70,23 +79,17 @@
 
 
 
-                    <script type="text/javascript">
-
-                        function wyswietl() {
-                            var xmlhttp = new XMLHttpRequest();
-
-                            xmlhttp.onreadystatechange = function() {
-                                if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
-                                    if (xmlhttp.status == 200) {
-                                        document.getElementById("demo").innerHTML = xmlhttp.responseText;
-                                    }
-                                    else if (xmlhttp.status == 400) {
-                                        alert('There was an error 400');
-                                    }
-                                    else {
-                                        alert('something else other than 200 was returned');
-                                    }
-                                }
-                            };
-                    </script>
+                    <script type="text/javascript">//function wyswietl() {var xmlhttp = new XMLHttpRequest();xmlhttp.onreadystatechange = function() {if (xmlhttp.readyState == XMLHttpRequest.DONE) {   // XMLHttpRequest.DONE == 4
+                      //              if (xmlhttp.status == 200) {
+                          //              document.getElementById("demo").innerHTML = xmlhttp.responseText;
+                        //            }
+                       //             else if (xmlhttp.status == 400) {
+                         //               alert('There was an error 400');
+                           //         }
+                             //       else {
+                               //         alert('something else other than 200 was returned');
+                                 //   }
+                               // }
+                           // };
+                  </script>
 {% endblock %}

@@ -2,10 +2,13 @@
 namespace App\Controller;
 
 
+use App\Entity\Article;
+use App\Repository\ArticleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
+
 
 class PageController extends AbstractController
 {
@@ -19,13 +22,15 @@ public function homepage(Environment $twig): Response
     return new Response($html);
 }
     #[Route('/userpanel', name: 'app_menu')]
-    public function UserPage(Environment $twig): Response
+    public function UserPage(ArticleRepository $articleRepo): Response
     {
-        $html = $twig->render('Pages/zalogowany.html.twig', [
-            'title' => 'Infonews',
-
+        $articles = $articleRepo->findAll();
+        return $this->render('Pages/zalogowany.html.twig', [
+            'articles' => $articles,
         ]);
-        return new Response($html);
+
+
+
     }
 
     #[Route('/add', name: 'app_add')]
