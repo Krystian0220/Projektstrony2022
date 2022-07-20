@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -42,16 +43,17 @@ public function homepage(Environment $twig): Response
         ]);
         return new Response($html);
     }
-    #[Route('/edit', name: 'app_edit')]
-    public function editnews(Environment $twig): Response
+    #[Route('/edit/{id}', name: 'app_edit')]
+    public function editnews(Environment $twig, int $id, ArticleRepository $articleRepository,article $articles): Response
     {
-        $html = $twig->render('Pages/edit.html.twig', [
-            'title' => 'Infonews',
 
-        ]);
-        return new Response($html);
+
+        return new Response($twig->render('Pages/edit.html.twig', [
+            'articles' => $articles,
+            'contents' => $articleRepository->findOneBy(['id' => $id])
+        ]));
+
     }
-
 
 
 }

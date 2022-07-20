@@ -11,10 +11,10 @@ class Article
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    public $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $content;
+    public ?string $content;
 
     public function getId(): ?int
     {
@@ -32,4 +32,6 @@ class Article
 
         return $this;
     }
+
+
 }

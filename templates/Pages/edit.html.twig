@@ -22,7 +22,7 @@
 <div class="container mt-5 h-100">
 
     <a href="wyloguj.php"><button type="button" class="btn btn-dark">Wyloguj</button></a>
-    <a href="{{ path('app_userpage') }}"><button type="button" class="btn btn-dark">Powrót do panelu</button></a>
+    <a href="{{ path('app_menu') }}"><button type="button" class="btn btn-dark">Powrót do panelu</button></a>
     <?php
   if (isset($_SESSION["blad"])) echo $_SESSION['blad'];
   ?>
@@ -35,84 +35,32 @@
             <div class="container mt-5 position-absolute top-50 start-50 translate-middle">
                 <h2>Zmiana treści</h2>
                 <p>Edytuj treśc</p>
-                <?php
-
-     require_once "pol.php";
-
-      try {
-        $id=$_GET['id'];
 
 
-      $dbh = new PDO('mysql:host=localhost;dbname=data_users', 'root' );
-      $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $stmt=$dbh->query("SELECT * FROM `news` WHERE `news`.`id_tresci` ='$id'");
 
-                while($row = $stmt->fetch())
-                {
-                $id=$row['id_tresci'];
-                $tresc=$row['tresc'];
 
-                echo '<div class="col-md-10 text-white ">
+
+
+
+                <div class="col-md-10 text-white ">
 
                     <div class="container mt-5 position-absolute top-50 start-50 translate-middle">
                         <h2>Edytuj treść</h2>
                         <p>Użyj pola aby zmienić treść</p>
-                        <form action="add.php" method="post">
+
+                        <form action="" method="post">
                             <div class="mb-4 mt-4">
                                 <label for="comment">Comments:</label>
-                                <textarea class="form-control" rows="16" id="comment" name="addtresc">'.$tresc.'</textarea>
+                                <textarea class="form-control" rows="16" id="comment" name="content">{% for article in articles %}{{ contents.id }}{% endfor %}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>
+
                     </div>
                 </div>
-                ';
-                }
 
+                <br/>
 
-                }
-                catch (Exception $e) {
-
-                print "Error!: " . $e->getMessage() . "<br/>";
-                die();
-                }
-
-                if (isset($_POST['submit']))
-                {
-                try {
-                $id=$_GET['id'];
-                $zmien_rek=$_POST['edit_rek'];
-
-
-
-                $dbh = new PDO('mysql:host=localhost;dbname=data_users', 'root' );
-                $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                $dbh->query("UPDATE `news` SET `tresc` = '$zmien_rek' WHERE `news`.`id_tresci` = '$id';");
-                //foreach($dbh->query('SELECT * from news') as $row) {
-                //  print_r($row);
-                // echo "\n";}
-
-
-
-                $_SESSION['zmien']='<span style="color: green; text-transform:uppercase;">Pomyślnie zmieniono rekord bazy!</span>';
-                $_SESSION['zalogowany'] = true;
-                header('location:zalogowany.php');
-
-                } catch (Exception $e) {
-
-                print "Error!: " . $e->getMessage() . "<br/>";
-                die();
-                }
-
-
-                $dbh = null;
-
-
-                }
-
-
-
-                ?>
 
             </div>
 

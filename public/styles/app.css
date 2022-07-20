@@ -3,7 +3,7 @@
 @import '~@fontsource/roboto-condensed';
 
 body {
-    background-color: grey;
+    background-image: url("img/tlo_bok.jpg");
     height: 100%;
 
 }
