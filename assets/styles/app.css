@@ -5,5 +5,8 @@
 body {
     background-image: url("img/tlo_str.jpg");
     height: 100%;
-}
 
+}
+textarea {
+    color: black;
+}

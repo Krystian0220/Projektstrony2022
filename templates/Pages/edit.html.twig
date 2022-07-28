@@ -51,7 +51,7 @@
                         <form action="" method="post">
                             <div class="mb-4 mt-4">
                                 <label for="comment">Comments:</label>
-                                <textarea class="form-control" rows="16" id="comment" name="content">{% for article in articles %}{{ contents.id }}{% endfor %}</textarea>
+                                <textarea class="form-control" rows="16" id="comment" name="content">{% for article in articles %}{{ article.content }} {{ article.id }} {% endfor %}</textarea>
                             </div>
                             <button type="submit" class="btn btn-primary">Submit</button>
                         </form>

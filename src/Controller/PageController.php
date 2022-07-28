@@ -44,14 +44,21 @@ public function homepage(Environment $twig): Response
         return new Response($html);
     }
     #[Route('/edit/{id}', name: 'app_edit')]
-    public function editnews(Environment $twig, int $id, ArticleRepository $articleRepository,article $articles): Response
+    public function edit(ManagerRegistry $doctrine, int $id): Response
     {
+        $entityManager = $doctrine->getManager();
+        $articles = $entityManager->getRepository(article::class)->find($id);
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
 
 
-        return new Response($twig->render('Pages/edit.html.twig', [
+        return $this->render('Pages/edit.html.twig', [
             'articles' => $articles,
-            'contents' => $articleRepository->findOneBy(['id' => $id])
-        ]));
+        ]);
+
 
     }
 

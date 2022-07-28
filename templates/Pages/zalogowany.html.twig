@@ -68,7 +68,7 @@
                             <td><span>{{ article.id }}</span></td>
                                 <td>{{ article.content }}</td>
                                 <td><a href="{{ url('app_delete', { id: article.id }) }}"><span class='material-icons'><button>Accept</button></span></a></td>
-                            <td name="article.content"><a href="{{ path('app_edit', { id: article.id, content: article.content } ) }}" ><span class='material-icons' ><span name="{{ article.content }}">edit</span></span></a><span class='material-icons'></span></td>
+                            <td name="article.content"><a href="{{ path('app_edit', { id: article.id } ) }}" ><span class='material-icons' >edit</span></a><span class='material-icons'></span></td>
                         </tr>
                         {% endfor %}
                         {% endblock %}

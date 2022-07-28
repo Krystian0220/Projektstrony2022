@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use Twig\Environment;
 
 class ContentController extends AbstractController
 {
+
 
     #[Route('/content', name: 'app_content')]
     public function add(ManagerRegistry $doctrine): Response
@@ -41,19 +43,14 @@ class ContentController extends AbstractController
         return $this->redirectToRoute('app_menu');
     }
 
-    #[Route('/change/{id}', name: 'app_change')]
-    public function changecontent(ManagerRegistry $entityManager, $id): Response
+    #[Route('/test/{id}', name: 'app_test')]
+    public function showcontent(Environment $twig, ArticleRepository $articleRepository, int $id): Response
     {
 
-        $query = $entityManager->getRepository(Article::class)->findOneBy($id);
-        if (!$query) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
 
-
-        return $this->redirectToRoute('app_change');
+        return new Response($twig->render('Pages/edit.html.twig', [
+                        'articles' => $articleRepository->findAll(),
+                    ]));
 
     }
 
