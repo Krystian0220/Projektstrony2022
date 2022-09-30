@@ -11,7 +11,7 @@
 </head>
 
 
-<div class="container-fluid p-5 bg-dark text-white text-center">
+<div class="container-fluid p-5 bg-dark text-white text-center sticky-top ">
     <h1>INFONEWS</h1>
     <p>Witaj ponownie!</p>
 </div>
@@ -62,16 +62,22 @@
                     {% block action %}
 
                     <div>
+
                         <table id="demo" class="table table-bordered table-sm text-white" >
+                            <div class="overflow-auto">
                           {% for article in articles  %}
+
                                 <tr class="col-md-10 text-justify"  >
                                     <td><span>{{ article.id }}</span></td>
                                     <td>{{ article.content }}</td>
                                     <td ><a href="{{ path('app_delete', { id: article.id }) }}" ><input type='submit' value='Delete'  ><span class='material-icons'></span></a></td>
                                     <td name="article.content"><a href="{{ path('app_edit', { id: article.id } ) }}" ><span class='material-icons' >edit</span></a><span class='material-icons'></span></td>
                                 </tr>
+
                         {% endfor %}
+                                <div class="overflow-auto">
                         </table>
+
                         {% endblock %}
 
                         <br><br>
@@ -82,5 +88,6 @@
 
                      </div>
                      </div>
+
 
 {% endblock %}
