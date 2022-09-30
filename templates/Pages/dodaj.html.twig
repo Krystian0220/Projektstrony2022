@@ -21,7 +21,7 @@
 </div>
 <div class="container mt-5 h-100">
 
-    <a href="wyloguj.php"><button type="button" class="btn btn-dark">Wyloguj</button></a>
+    <a href=""><button type="button" class="btn btn-dark">Wyloguj</button></a>
     <a href="{{ path('app_menu') }}"><button type="button" class="btn btn-dark">Powrót do panelu</button></a>
 
 </div>
@@ -32,6 +32,7 @@
         <div class="col-md-10 text-white ">
 
             <div class="container mt-5 position-absolute top-50 start-50 translate-middle">
+                <br>
                 <h2>Nowa treść</h2>
                 <p>Użyj pola aby dodać nową treść</p>
                 <form action="{{ path('app_content') }}" method="post">

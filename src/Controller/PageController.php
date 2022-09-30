@@ -13,22 +13,26 @@ use Twig\Environment;
 
 class PageController extends AbstractController
 {
-#[Route('/', name: 'app_homepage')]
-public function homepage(Environment $twig): Response
-{
-    $html = $twig->render('Pages/index.html.twig', [
-        'title' => 'Infonews',
+    #[Route('/', name: 'app_homepage')]
+    public function homepage(Environment $twig): Response
+    {
+        $html = $twig->render(
+            'Pages/index.html.twig', [
+            'title' => 'Infonews',
 
-    ]);
-    return new Response($html);
-}
+            ]
+        );
+        return new Response($html);
+    }
     #[Route('/userpanel', name: 'app_menu')]
     public function UserPage(ArticleRepository $articleRepo): Response
     {
         $articles = $articleRepo->findAll();
-        return $this->render('Pages/zalogowany.html.twig', [
+        return $this->render(
+            'Pages/zalogowany.html.twig', [
             'articles' => $articles,
-        ]);
+            ]
+        );
 
 
 
@@ -37,17 +41,19 @@ public function homepage(Environment $twig): Response
     #[Route('/add', name: 'app_add')]
     public function addnews(Environment $twig): Response
     {
-        $html = $twig->render('Pages/dodaj.html.twig', [
+        $html = $twig->render(
+            'Pages/dodaj.html.twig', [
             'title' => 'Infonews',
 
-        ]);
+            ]
+        );
         return new Response($html);
     }
     #[Route('/edit/{id}', name: 'app_edit')]
     public function edit(ManagerRegistry $doctrine, int $id): Response
     {
         $entityManager = $doctrine->getManager();
-        $articles = $entityManager->getRepository(article::class)->find($id);
+        $articles = $entityManager->getRepository(article::class)->findBy(['id' => $id]);
         if (!$articles) {
             throw $this->createNotFoundException(
                 'No product found for id '.$id
@@ -55,9 +61,11 @@ public function homepage(Environment $twig): Response
         }
 
 
-        return $this->render('Pages/edit.html.twig', [
+        return $this->render(
+            'Pages/edit.html.twig', [
             'articles' => $articles,
-        ]);
+            ]
+        );
 
 
     }

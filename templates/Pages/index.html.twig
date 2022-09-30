@@ -31,7 +31,7 @@
     <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas"></button>
   </div>
   <div class="offcanvas-body">
-    <form action="" method="post">
+    <form action="{{ path('app_menu') }}" >
   <div class="mb-3 mt-3">
     <label for="email" class="form-label">Login</label>
     <input type="text" class="form-control"  placeholder="Login" name="login" required>
@@ -73,7 +73,7 @@
     </div>
     <div class="col-md-4 text-white ">
       <h3>Zarejestruj się</h3>
-      <form action="/action_page.php">
+      <form action="" >
     <div class="mb-3 mt-3">
       <label for="email" class="form-label">Email:</label>
       <input type="email" class="form-control" id="email" placeholder="Enter email" name="email">
