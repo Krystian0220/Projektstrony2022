@@ -4,10 +4,13 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-class User implements UserInterface
+#[UniqueEntity(fields: ['login'], message: 'There is already an account with this email')]
+class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
@@ -15,27 +18,30 @@ class User implements UserInterface
     private $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    private $login;
 
     #[ORM\Column(type: 'json')]
     private $roles = [];
 
-    #[ORM\Column(type: 'string', length: 255, nullable: true)]
-    private $firstname;
+    #[ORM\Column(type: 'string')]
+    private $password;
+
+    #[ORM\Column(type: 'boolean')]
+    private $isVerified = false;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getEmail(): ?string
+    public function getlogin(): ?string
     {
-        return $this->email;
+        return $this->login;
     }
 
-    public function setEmail(string $email): self
+    public function setlogin(string $login): self
     {
-        $this->email = $email;
+        $this->login = $login;
 
         return $this;
     }
@@ -47,7 +53,7 @@ class User implements UserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string) $this->login;
     }
 
     /**
@@ -70,6 +76,21 @@ class User implements UserInterface
     }
 
     /**
+     * @see PasswordAuthenticatedUserInterface
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = $password;
+
+        return $this;
+    }
+
+    /**
      * @see UserInterface
      */
     public function eraseCredentials()
@@ -78,14 +99,14 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
-    public function getFirstname(): ?string
+    public function isVerified(): bool
     {
-        return $this->firstname;
+        return $this->isVerified;
     }
 
-    public function setFirstname(?string $firstname): self
+    public function setIsVerified(bool $isVerified): self
     {
-        $this->firstname = $firstname;
+        $this->isVerified = $isVerified;
 
         return $this;
     }
