@@ -6,6 +6,7 @@ use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
+
 /**
  * @extends ServiceEntityRepository<Article>
  *
@@ -38,6 +39,58 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
 
+    }
+    public function create(Article $content)
+    {
+
+
+        $tresc = new Article($content);
+        $tresc->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
+        $this->getEntityManager()->persist($tresc);
+        $this->getEntityManager()->flush();
+    }
+    public function delete(Article $content)
+    {
+        //$content = $this->getEntityManager(Article::class)->find($id);
+        $this->getEntityManager()->remove($content);
+
+            $this->getEntityManager()->flush();
+
+
+    }
+
+    public function edit(Article $id)
+    {
+
+        $articles = $this->setContent(Article::class)->find($id);
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+
+
+        return $this->render(
+            'Pages/edit.html.twig', [
+                'articles' => $articles,
+
+            ]
+        );
+    }
+
+    public function update(Article $id)
+    {
+
+        $content = $this->find($id);
+
+        if (!$content) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+        $content->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
+        $this->getEntityManager()->persist($content);
+        $this->getEntityManager()->flush();
     }
 
 

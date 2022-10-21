@@ -70,7 +70,7 @@
                                 <tr class="col-md-10 text-justify"  >
                                     <td><span>{{ article.id }}</span></td>
                                     <td>{{ article.content }}</td>
-                                    <td ><a href="{{ path('app_delete', { id: article.id }) }}" ><input type='submit' value='Delete'  ><span class='material-icons'></span></a></td>
+                                    <td><a href="{{ path('app_delete', { id: article.id }) }} " ><input type='submit' value='Delete'  ><span class='material-icons'></span></a></td>
                                     <td name="article.content"><a href="{{ path('app_edit', { id: article.id } ) }}" ><span class='material-icons' >edit</span></a><span class='material-icons'></span></td>
                                 </tr>
 

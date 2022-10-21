@@ -21,4 +21,9 @@ class LoginController extends AbstractController
             'error'         => $error,
         ]);
     }
+    #[Route('/account', name: 'app_acccount')]
+    public function account(AuthenticationUtils $authenticationUtils): Response
+    {// get the login error if there is one
+        dd($this->getUser());
+    }
 }
