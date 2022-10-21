@@ -49,26 +49,7 @@ class PageController extends AbstractController
         );
         return new Response($html);
     }
-    #[Route('/edit/{id}', name: 'app_edit')]
-    public function edit(ManagerRegistry $doctrine, int $id): Response
-    {
-        $entityManager = $doctrine->getManager();
-        $articles = $entityManager->getRepository(article::class)->findBy(['id' => $id]);
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
 
-
-        return $this->render(
-            'Pages/edit.html.twig', [
-            'articles' => $articles,
-            ]
-        );
-
-
-    }
 
 
 }

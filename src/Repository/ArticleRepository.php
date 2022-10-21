@@ -5,6 +5,8 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use http\Env\Response;
+use Twig\Environment;
 
 
 /**
@@ -59,24 +61,6 @@ class ArticleRepository extends ServiceEntityRepository
 
     }
 
-    public function edit(Article $id)
-    {
-
-        $articles = $this->setContent(Article::class)->find($id);
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No product found for id ' . $id
-            );
-        }
-
-
-        return $this->render(
-            'Pages/edit.html.twig', [
-                'articles' => $articles,
-
-            ]
-        );
-    }
 
     public function update(Article $id)
     {
@@ -118,5 +102,6 @@ class ArticleRepository extends ServiceEntityRepository
 //            ->getOneOrNullResult()
 //        ;
 //    }
+
 
 }

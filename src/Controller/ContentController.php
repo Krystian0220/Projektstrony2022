@@ -41,17 +41,27 @@ class ContentController extends AbstractController
         return $this->redirectToRoute('app_menu' );
     }
 
-
-
     #[Route('/edit/{id}', name: 'app_edit')]
-    public function edit(int $id): Response
+    public function edit($id): Response
     {
-        $content = $this->articleRepository->find($id);
-        $this->articleRepository->edit($content);
 
-        return $this->redirectToRoute('app_edit' );
+        $articles = $this->articleRepository->findBy(['id' =>$id]);
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+
+        return $this->render(
+            'Pages/edit.html.twig', [
+                'articles' => $articles,
+
+            ]
+        );
 
     }
+
+
 
     #[Route('/update{id}', name: 'app_update')]
     public function update(int $id): Response
