@@ -7,15 +7,41 @@
         <div class="alert alert-danger" role="alert">{{ flash_error }}</div>
     {% endfor %}
 
-    <h1>Register</h1>
 
-    {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.login) }}
-        {{ form_row(registrationForm.plainPassword, {
-            label: 'Password'
-        }) }}
-        {{ form_row(registrationForm.agreeTerms) }}
+    <div class="mt-4 p-5 bg-secondary text-white rounded">
+        <h1 style="text-align: center">Register</h1>
+        <div class="row">
+            <div class="col"></div>
+            <div class="col"><div> <ul class="list-group">
+                        {{ form_start(registrationForm) }}
+                        <li class="list-group-item">{{ form_row(registrationForm.login) }}</li>
+                        <li class="list-group-item">{{ form_row(registrationForm.plainPassword, {
+                                label: 'Password'
+                            }) }}</li>
+                        <li class="list-group-item">{{ form_row(registrationForm.agreeTerms) }}</li>
+                    </ul> </div>
+                <div class="row">
+                    <div class="col-sm-3"></div>
+                    <div class="col-sm-3"><div class="col mt-1 p-3"><button style="width: 100px;" type="submit" class="btn btn-dark">Register</button></div></div>
+                    <div class="col-sm-3"><div class="col mt-1 p-3"><a href="{{ path('app_homepage') }}"><button style="width: 100px;" type="submit" class="btn btn-dark">Back</button></a></div></div>
+                    <div class="col-sm-3"></div>
+                </div>
 
-        <button type="submit" class="btn">Register</button>
-    {{ form_end(registrationForm) }}
+
+
+
+
+
+
+
+
+                <div class="row">
+
+                 {{ form_end(registrationForm) }}
+
+                </div>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
 {% endblock %}

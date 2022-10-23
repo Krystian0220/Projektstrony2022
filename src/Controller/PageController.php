@@ -1,10 +1,7 @@
 <?php
 namespace App\Controller;
 
-
-use App\Entity\Article;
 use App\Repository\ArticleRepository;
-use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -13,6 +10,13 @@ use Twig\Environment;
 
 class PageController extends AbstractController
 {
+    private $articleRepository;
+
+    public function __construct(ArticleRepository $articleRepository)
+    {
+        $this->articleRepository = $articleRepository;
+    }
+
     #[Route('/', name: 'app_homepage')]
     public function homepage(Environment $twig): Response
     {
@@ -35,6 +39,26 @@ class PageController extends AbstractController
         );
 
 
+
+    }
+
+    #[Route('/edit/{id}', name: 'app_edit')]
+    public function edit($id): Response
+    {
+
+        $articles = $this->articleRepository->findBy(['id' =>$id]);
+        if (!$articles) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+
+        return $this->render(
+            'Pages/edit.html.twig', [
+                'articles' => $articles,
+
+            ]
+        );
 
     }
 

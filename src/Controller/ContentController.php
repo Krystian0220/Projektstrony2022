@@ -10,7 +10,6 @@ use App\Entity\Article;
 use App\Repository\ArticleRepository;
 
 
-
 class ContentController extends AbstractController
 {
     private $articleRepository;
@@ -23,12 +22,10 @@ class ContentController extends AbstractController
     #[Route('/content', name: 'app_content')]
     public function create(Request $request): Response
     {
-
         $content = $request->get('content');
         $this->articleRepository->create(new Article($content));
 
-      return $this->redirectToRoute('app_menu');
-
+        return $this->redirectToRoute('app_menu');
     }
 
     #[Route('/delete/{id}', name: 'app_delete')]
@@ -38,30 +35,8 @@ class ContentController extends AbstractController
         $content = $this->articleRepository->find($id);
         $this->articleRepository->delete($content);
 
-        return $this->redirectToRoute('app_menu' );
+        return $this->redirectToRoute('app_menu');
     }
-
-    #[Route('/edit/{id}', name: 'app_edit')]
-    public function edit($id): Response
-    {
-
-        $articles = $this->articleRepository->findBy(['id' =>$id]);
-        if (!$articles) {
-            throw $this->createNotFoundException(
-                'No product found for id ' . $id
-            );
-        }
-
-        return $this->render(
-            'Pages/edit.html.twig', [
-                'articles' => $articles,
-
-            ]
-        );
-
-    }
-
-
 
     #[Route('/update{id}', name: 'app_update')]
     public function update(int $id): Response
@@ -75,7 +50,4 @@ class ContentController extends AbstractController
             ]
         );
     }
-
-
-
 }
