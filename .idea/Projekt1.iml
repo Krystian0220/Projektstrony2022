@@ -131,6 +131,11 @@
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/complexity" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/version" />
       <excludeFolder url="file://$MODULE_DIR$/vendor/sebastian/object-enumerator" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/phpunit-bridge" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/css-selector" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/dom-crawler" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/symfony/browser-kit" />
+      <excludeFolder url="file://$MODULE_DIR$/vendor/masterminds/html5" />
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
