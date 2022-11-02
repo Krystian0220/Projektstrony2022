@@ -19,7 +19,9 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('login')
             ->add(
-                'agreeTerms', CheckboxType::class, [
+                'agreeTerms',
+                CheckboxType::class,
+                [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue(
@@ -31,7 +33,9 @@ class RegistrationFormType extends AbstractType
                 ]
             )
             ->add(
-                'plainPassword', PasswordType::class, [
+                'plainPassword',
+                PasswordType::class,
+                [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
                 'mapped' => false,

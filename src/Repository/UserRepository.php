@@ -52,18 +52,12 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         }
 
         $user->setPassword($newHashedPassword);
-
         $this->add($user, true);
     }
     public function register($user)
     {
-
-
             $this->getEntityManager()->persist($user);
             $this->getEntityManager()->flush();
-
-            // generate a signed url and email it to the user
-
     }
 
 

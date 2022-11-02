@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Controller;
 
 use App\Repository\ArticleRepository;
@@ -6,11 +7,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
-
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 class PageController extends AbstractController
 {
-    private $articleRepository;
+    private ArticleRepository $articleRepository;
 
     public function __construct(ArticleRepository $articleRepository)
     {
@@ -21,32 +24,30 @@ class PageController extends AbstractController
     public function homepage(Environment $twig): Response
     {
         $html = $twig->render(
-            'Pages/index.html.twig', [
+            'Pages/index.html.twig',
+            [
             'title' => 'Infonews',
-
             ]
         );
         return new Response($html);
     }
-    #[Route('/userpanel', name: 'app_menu')]
-    public function UserPage(ArticleRepository $articleRepo): Response
+    #[Route('/menu', name: 'app_menu')]
+    public function menu(): Response
     {
-        $articles = $articleRepo->findAll();
+        $articles = $this->articleRepository->findAll();
         return $this->render(
-            'Pages/zalogowany.html.twig', [
+            'Pages/zalogowany.html.twig',
+            [
             'articles' => $articles,
             ]
         );
-
-
-
     }
 
     #[Route('/edit/{id}', name: 'app_edit')]
     public function edit($id): Response
     {
 
-        $articles = $this->articleRepository->findBy(['id' =>$id]);
+        $articles = $this->articleRepository->findBy(['id' => $id]);
         if (!$articles) {
             throw $this->createNotFoundException(
                 'No product found for id ' . $id
@@ -54,26 +55,22 @@ class PageController extends AbstractController
         }
 
         return $this->render(
-            'Pages/edit.html.twig', [
+            'Pages/edit.html.twig',
+            [
                 'articles' => $articles,
-
             ]
         );
-
     }
 
     #[Route('/add', name: 'app_add')]
     public function addnews(Environment $twig): Response
     {
         $html = $twig->render(
-            'Pages/dodaj.html.twig', [
+            'Pages/dodaj.html.twig',
+            [
             'title' => 'Infonews',
-
             ]
         );
         return new Response($html);
     }
-
-
-
 }

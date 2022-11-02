@@ -1,4 +1,6 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Controller;
 
@@ -9,10 +11,9 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
 
-
 class ContentController extends AbstractController
 {
-    private $articleRepository;
+    private ArticleRepository $articleRepository;
 
     public function __construct(ArticleRepository $articleRepository)
     {
@@ -24,17 +25,14 @@ class ContentController extends AbstractController
     {
         $content = $request->get('content');
         $this->articleRepository->create(new Article($content));
-
         return $this->redirectToRoute('app_menu');
     }
 
     #[Route('/delete/{id}', name: 'app_delete')]
     public function delete(int $id): Response
     {
-
         $content = $this->articleRepository->find($id);
         $this->articleRepository->delete($content);
-
         return $this->redirectToRoute('app_menu');
     }
 
@@ -43,9 +41,9 @@ class ContentController extends AbstractController
     {
         $content = $this->articleRepository->find($id);
         $this->articleRepository->update($content);
-
         return $this->redirectToRoute(
-            'app_menu', [
+            'app_menu',
+            [
                 'id' => $content->getId()
             ]
         );

@@ -5,9 +5,6 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Env\Response;
-use Twig\Environment;
-
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -40,33 +37,23 @@ class ArticleRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
-
     }
     public function create(Article $content)
     {
-
-
-        $tresc = new Article($content);
-        $tresc->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
-        $this->getEntityManager()->persist($tresc);
+        $tres = new Article($content);
+        $tres->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
+        $this->getEntityManager()->persist($tres);
         $this->getEntityManager()->flush();
     }
     public function delete(Article $content)
     {
-        //$content = $this->getEntityManager(Article::class)->find($id);
         $this->getEntityManager()->remove($content);
-
             $this->getEntityManager()->flush();
-
-
     }
-
 
     public function update(Article $id)
     {
-
         $content = $this->find($id);
-
         if (!$content) {
             throw $this->createNotFoundException(
                 'No product found for id ' . $id
@@ -102,6 +89,4 @@ class ArticleRepository extends ServiceEntityRepository
     //            ->getOneOrNullResult()
     //        ;
     //    }
-
-
 }
