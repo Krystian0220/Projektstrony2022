@@ -10,10 +10,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Article;
 use App\Repository\ArticleRepository;
+use App\Model\Creator;
 
 class ContentController extends AbstractController
 {
     private ArticleRepository $articleRepository;
+    private Creator $Creator;
 
     public function __construct(ArticleRepository $articleRepository)
     {
@@ -21,10 +23,11 @@ class ContentController extends AbstractController
     }
 
     #[Route('/content', name: 'app_content')]
-    public function create(Request $request): Response
+    public function create(Request $request, Creator $creator): Response
     {
+        $this->Creator = $creator;
         $content = $request->get('content');
-        $this->articleRepository->create(new Article($content));
+        $creator->creater($content);
         return $this->redirectToRoute('app_menu');
     }
 
