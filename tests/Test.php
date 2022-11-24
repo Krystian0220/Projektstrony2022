@@ -2,11 +2,21 @@
 
 namespace App\Tests;
 
+use App\Model\ArticleCreator;
 use testarray;
 use PHPUnit\Framework\TestCase;
 
 class Test extends TestCase
 {
+    public function testArticleCreatorWithSuccess(): void
+    {
+        $articleCreator = new ArticleCreator();
+
+        $article = $articleCreator->create('tresc');
+
+        $this->assertSame('tresc', $article->getContent());
+    }
+
     public function testEmpty(): array
     {
         $stack = [];

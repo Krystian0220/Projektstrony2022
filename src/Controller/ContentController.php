@@ -4,27 +4,32 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use App\Model\ArticleCreator;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Entity\Article;
 use App\Repository\ArticleRepository;
 
 class ContentController extends AbstractController
 {
     private ArticleRepository $articleRepository;
+    private ArticleCreator $articleCreator;
 
-    public function __construct(ArticleRepository $articleRepository)
+    public function __construct(ArticleRepository $articleRepository, ArticleCreator $articleCreator)
     {
         $this->articleRepository = $articleRepository;
+        $this->articleCreator = $articleCreator;
     }
 
     #[Route('/content', name: 'app_content')]
     public function create(Request $request): Response
     {
         $content = $request->get('content');
-        $this->articleRepository->create(new Article($content));
+
+        $article = $this->articleCreator->create($content);
+        $this->articleRepository->save($article);
+
         return $this->redirectToRoute('app_menu');
     }
 
@@ -37,7 +42,7 @@ class ContentController extends AbstractController
     }
 
     #[Route('/update{id}', name: 'app_update')]
-    public function update(int $id): Response
+    public function update(int $id, Request $request): Response
     {
         $content = $this->articleRepository->find($id);
         $this->articleRepository->update($content);
