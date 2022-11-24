@@ -5,7 +5,7 @@ namespace App\Repository;
 use App\Entity\Article;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
-use http\Env\Request;
+
 
 /**
  * @extends ServiceEntityRepository<Article>
@@ -50,15 +50,8 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
     }
 
-    public function update(Article $id)
+    public function update(Article $content)
     {
-        $content = $this->find($id);
-        if (!$content) {
-            throw $this->createNotFoundException(
-                'No product found for id ' . $id
-            );
-        }
-        $content->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
         $this->getEntityManager()->persist($content);
         $this->getEntityManager()->flush();
     }
