@@ -35,6 +35,8 @@ class ContentController extends AbstractController
 
         $creator->creater($content);
 
+        $creator->creater($content);
+
         return $this->redirectToRoute('app_menu');
     }
 
