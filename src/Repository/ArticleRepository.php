@@ -39,11 +39,9 @@ class ArticleRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
-    public function create(Article $content)
+    public function save(Article $article)
     {
-        $tres = new Article($content);
-        $tres->setContent(array_key_exists("content", $_POST) ? $_POST["content"] : "");
-        $this->getEntityManager()->persist($tres);
+        $this->getEntityManager()->persist($article);
         $this->getEntityManager()->flush();
     }
     public function delete(Article $content)
