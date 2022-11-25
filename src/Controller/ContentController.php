@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Repository\ArticleRepository;
-use App\Model\Creator;
 
 class ContentController extends AbstractController
 {
@@ -19,12 +18,14 @@ class ContentController extends AbstractController
     private ArticleCreator $articleCreator;
     private ArticleUpdater $articleUpdater;
 
-    public function __construct(ArticleRepository $articleRepository, ArticleCreator $articleCreator,ArticleUpdater $articleUpdater)
-    {
+    public function __construct(
+        ArticleRepository $articleRepository,
+        ArticleCreator $articleCreator,
+        ArticleUpdater $articleUpdater
+    ) {
         $this->articleRepository = $articleRepository;
         $this->articleCreator = $articleCreator;
         $this->articleUpdater = $articleUpdater;
-
     }
 
     #[Route('/content', name: 'app_content')]
@@ -34,8 +35,6 @@ class ContentController extends AbstractController
         $content = $request->get('content');
         $article = $this->articleCreator->create($content);
         $this->articleRepository->save($article);
-
-
 
         return $this->redirectToRoute('app_menu');
     }
@@ -51,9 +50,9 @@ class ContentController extends AbstractController
     #[Route('/update{id}', name: 'app_update')]
     public function update(int $id, Request $request): Response
     {
-        $newcontent = $request->get('content');
+        $news = $request->get('content');
         $content = $this->articleRepository->find($id);
-        $article = $this->articleUpdater->update($id, $newcontent);
+        $article = $this->articleUpdater->update($id, $news);
         $this->articleRepository->save($article);
         return $this->redirectToRoute(
             'app_menu',
