@@ -51,14 +51,8 @@ class ContentController extends AbstractController
     public function update(int $id, Request $request): Response
     {
         $news = $request->get('content');
-        $content = $this->articleRepository->find($id);
         $article = $this->articleUpdater->update($id, $news);
         $this->articleRepository->save($article);
-        return $this->redirectToRoute(
-            'app_menu',
-            [
-                'id' => $content->getId()
-            ]
-        );
+        return $this->redirectToRoute('app_menu');
     }
 }

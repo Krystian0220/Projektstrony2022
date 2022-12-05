@@ -46,12 +46,12 @@ class ArticleRepository extends ServiceEntityRepository
     public function delete(Article $content)
     {
         $this->getEntityManager()->remove($content);
-            $this->getEntityManager()->flush();
+            $this->getEntityManager()->flush($content);
     }
 
     public function update(Article $content)
     {
         $this->getEntityManager()->persist($content);
-        $this->getEntityManager()->flush();
+        $this->getEntityManager()->flush($content);
     }
 }
