@@ -1,6 +1,7 @@
 <?php declare(strict_types = 1);
 
 namespace App\Tests;
+
 use App\Model\ArticleUpdater;
 use PHPUnit\Framework\TestCase;
 
@@ -8,9 +9,11 @@ class TestArticleUpdater extends TestCase
 {
 
 
-    public function testArticleUpdaterWithSuccess(): void
+    private ArticleUpdater $articleUpdater;
+
+    public function testArticleUpdaterWithSuccess(ArticleUpdater $articleUpdater): void
     {
-        $articleUpdater = new ArticleUpdater();
+        $this->articleUpdater = $articleUpdater;
 
         $article = $articleUpdater->update(5, 'tresc');
 
