@@ -7,14 +7,9 @@ use PHPUnit\Framework\TestCase;
 
 class TestArticleUpdater extends TestCase
 {
-
-
-    private ArticleUpdater $articleUpdater;
-
-    public function testArticleUpdaterWithSuccess(ArticleUpdater $articleUpdater): void
+    public function testArticleUpdaterWithSuccess(): void
     {
-        $this->articleUpdater = $articleUpdater;
-
+        $articleUpdater = new ArticleUpdater();
         $article = $articleUpdater->update(5, 'tresc');
 
         $this->assertSame('5', $article->getId());

@@ -50,8 +50,15 @@ class ContentController extends AbstractController
     #[Route('/update{id}', name: 'app_update')]
     public function update(int $id, Request $request): Response
     {
-        $news = $request->get('content');
-        $article = $this->articleUpdater->update($id, $news);
+
+        $news = $this->articleRepository->find($id);
+        if (!$news) {
+            throw $this->createNotFoundException(
+                'No product found for id ' . $id
+            );
+        }
+        $content = $request->get('content');
+        $article = $this->articleUpdater->update($news, $content);
         $this->articleRepository->save($article);
         return $this->redirectToRoute('app_menu');
     }
