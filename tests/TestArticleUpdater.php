@@ -1,4 +1,6 @@
-<?php declare(strict_types = 1);
+<?php
+
+declare(strict_types=1);
 
 namespace App\Tests;
 
@@ -10,10 +12,7 @@ class TestArticleUpdater extends TestCase
     public function testArticleUpdaterWithSuccess(): void
     {
         $articleUpdater = new ArticleUpdater();
-        $article = $articleUpdater->update(5, 'tresc');
-
-        $this->assertSame('5', $article->getId());
+        $article = $articleUpdater->update('tresc');
         $this->assertSame('tresc', $article->getContent());
     }
-
 }
