@@ -10,7 +10,6 @@ class ArticleCreator
     {
         $article = new Article();
         $article->setContent($content);
-
         return $article;
     }
 }

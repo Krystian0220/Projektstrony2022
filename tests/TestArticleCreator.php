@@ -13,7 +13,6 @@ class TestArticleCreator extends TestCase
     {
         $articleCreator = new ArticleCreator();
         $article = $articleCreator->create('tresc');
-
         $this->assertSame('tresc', $article->getContent());
     }
 }
