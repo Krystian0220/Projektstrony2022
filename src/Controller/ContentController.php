@@ -28,7 +28,7 @@ class ContentController extends AbstractController
         $this->articleUpdater = $articleUpdater;
     }
 
-    #[Route('/content', name: 'app_content')]
+    #[Route('/content', name: 'app_content', methods: 'POST')]
     public function create(Request $request): Response
     {
 

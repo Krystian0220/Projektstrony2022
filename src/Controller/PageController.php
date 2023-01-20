@@ -8,7 +8,6 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-
 class PageController extends AbstractController
 {
     private ArticleRepository $articleRepository;
