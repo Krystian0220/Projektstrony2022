@@ -29,7 +29,6 @@ class ContentController extends AbstractController
     #[Route('/content', name: 'app_content', methods: 'POST')]
     public function create(Request $request): Response
     {
-
         $content = $request->get('content');
         $article = $this->articleCreator->create($content);
         $this->articleRepository->save($article);
