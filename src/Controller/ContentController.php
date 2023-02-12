@@ -32,7 +32,6 @@ class ContentController extends AbstractController
         $content = $request->get('content');
         $article = $this->articleCreator->create($content);
         $this->articleRepository->save($article);
-
         return $this->redirectToRoute('app_menu');
     }
 
@@ -47,7 +46,6 @@ class ContentController extends AbstractController
     #[Route('/update{id}', name: 'app_update')]
     public function update(int $id, Request $request): Response
     {
-
         $news = $this->articleRepository->find($id);
         if (!$news) {
             throw $this->createNotFoundException(

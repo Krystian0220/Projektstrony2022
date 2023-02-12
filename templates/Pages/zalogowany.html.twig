@@ -10,7 +10,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 </head>
 
-
 <div class="container-fluid p-5 bg-dark text-white text-center sticky-top ">
     <h1>INFONEWS</h1>
     <p>Witaj ponownie!</p>
@@ -19,8 +18,6 @@
     <a href="{{ path('app_homepage') }}"><button type="button" class="btn btn-dark ">Strona główna</button></a>
     <a href=""><button type="button" class="btn btn-dark">Wyloguj</button></a>
     <a href="{{ path('app_add') }}"><button type="button" class="btn btn-dark">Dodaj</button></a>
-
-
 </div>
 
 <div class="container mt-5 h-100">
@@ -31,24 +28,18 @@
 
                 <div class="mb-3 mt-3">
                     <label for="password" class="form-label">Login</label>
-
                         <input type="text" class="form-control" placeholder="Login">
-
                 </div>
                 <div class="mb-3">
                     <label for="pwd" class="form-label">Hasło</label>
                     <input type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
                 </div>
-
-
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
 
         <div class="col-md-8 text-white">
             <div class="row">
-
-
                 <h2 class="center">Twoje wpisy</h2>
                 <table class="table text-white">
                     <thead >
@@ -57,37 +48,30 @@
                         <th scope="col" class="col-md-10 text-center">Treść</th>
                         <th scope="col" class="col-md-1 p-4 text-center" ></th>
                         <th scope="col" class="col-md-1 p-2" >Akcja</th>
-
                     </tr>
                     </thead>
                 </table>
                     {% block action %}
-
                     <div>
 
                         <table id="demo" class="table table-bordered table-sm text-white" >
                             <div class="overflow-auto">
                           {% for article in articles  %}
-
                                 <tr class="col-md-10 text-justify"  >
                                     <td><span>{{ article.id }}</span></td>
                                     <td>{{ article.content }}</td>
                                     <td><a href="{{ path('app_delete', { id: article.id }) }} " ><input type='submit' value='Delete'  ><span class='material-icons'></span></a></td>
                                     <td name="article.content"><a href="{{ path('app_edit', { id: article.id } ) }}" ><span class='material-icons' >edit</span></a><span class='material-icons'></span></td>
                                 </tr>
-
                         {% endfor %}
                                 <div class="overflow-auto"></div></div>
                         </table>
-
                         {% endblock %}
 
                         <br><br>
+
                         <div class="mt-4 p-4 bg-dark text-white text-center fixed-bottom  bottom-0  start-0 end-0 " >
                             <p>Made by <b>Krystian Ptak</b></p>
-
                      </div>
                      </div>
-
-
 {% endblock %}

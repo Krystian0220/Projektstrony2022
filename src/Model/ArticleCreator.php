@@ -4,7 +4,7 @@ namespace App\Model;
 
 use App\Entity\Article;
 
-class ArticleCreator
+final class ArticleCreator
 {
     public function create(string $content): Article
     {
@@ -12,4 +12,5 @@ class ArticleCreator
         $article->setContent($content);
         return $article;
     }
+
 }

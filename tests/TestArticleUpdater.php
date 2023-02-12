@@ -12,10 +12,10 @@ class TestArticleUpdater extends TestCase
 {
     public function testArticleUpdaterWithSuccess(): void
     {
-        $article1 = new article();
-        $article1->tresc = 'tresc';
+        $article = new article();
+        $article->tresc = 'tresc';
         $articleUpdater = new ArticleUpdater();
-        $article = $articleUpdater->update(article: $article1, content: 'tresc');
+        $article = $articleUpdater->update(article: $article, content: 'tresc');
         $this->assertSame('tresc', $article->getContent());
     }
 }
